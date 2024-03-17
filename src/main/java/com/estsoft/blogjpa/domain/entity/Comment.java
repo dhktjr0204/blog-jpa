@@ -1,8 +1,6 @@
 package com.estsoft.blogjpa.domain.entity;
 
-import com.estsoft.blogjpa.domain.dto.CommentDto;
 import com.estsoft.blogjpa.domain.dto.CommentResponse;
-import com.estsoft.blogjpa.repository.CommentRepository;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -10,8 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,18 +42,9 @@ public class Comment {
         this.body=body;
     }
 
-    public CommentDto toEntity(){
-        return CommentDto.builder()
-                .id(id)
-                .body(body)
-                .createdAt(createdAt)
-                .build();
-    }
-
     public CommentResponse toResponse(){
         return CommentResponse.builder()
                 .id(id)
-                .articleId(article.getId())
                 .body(body)
                 .createdAt(createdAt)
                 .build();

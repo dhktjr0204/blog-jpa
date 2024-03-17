@@ -21,10 +21,10 @@ public class CommentController {
     private final CommentService commentService;
 
     @GetMapping("/{articleId}/{commentId}")
-    public ResponseEntity<Comment> getComment(@PathVariable Long articleId
+    public ResponseEntity<CommentResponse> getComment(@PathVariable Long articleId
             , @PathVariable Long commentId){
         Comment comment = commentService.findComment(articleId,commentId);
-        return ResponseEntity.ok(comment);
+        return ResponseEntity.ok(comment.toResponse());
     }
 
     @PostMapping("/{articleId}")

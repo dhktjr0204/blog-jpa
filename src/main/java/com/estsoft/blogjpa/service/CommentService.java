@@ -2,7 +2,7 @@ package com.estsoft.blogjpa.service;
 
 import com.estsoft.blogjpa.domain.dto.AddCommentRequest;
 import com.estsoft.blogjpa.domain.dto.AllCommentResponse;
-import com.estsoft.blogjpa.domain.dto.CommentDto;
+import com.estsoft.blogjpa.domain.dto.CommentResponse;
 import com.estsoft.blogjpa.domain.entity.Article;
 import com.estsoft.blogjpa.domain.entity.Comment;
 import com.estsoft.blogjpa.repository.BlogRepository;
@@ -33,12 +33,12 @@ public class CommentService {
         List<Comment> comments = commentRepository.findByArticleId(articleId)
                 .orElseThrow(IllegalArgumentException::new);
 
-        List<CommentDto> commentDtoList=new ArrayList<>();
+        List<CommentResponse> commentList=new ArrayList<>();
 
         for (Comment comment : comments) {
-            commentDtoList.add(comment.toEntity());
+            commentList.add(comment.toResponse());
         }
 
-        return new AllCommentResponse(comments.get(0).getArticle(), commentDtoList);
+        return new AllCommentResponse(comments.get(0).getArticle(), commentList);
     }
 }
